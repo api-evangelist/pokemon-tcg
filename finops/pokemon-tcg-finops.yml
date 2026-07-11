@@ -1,0 +1,93 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Pokémon TCG API
+providerId: pokemon-tcg
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Pokemon
+- Trading Cards
+- TCG
+- Gaming
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Pokémon TCG API consumption. There is no vendor invoice at
+  any usage level - the API is a free, community-run service funded by
+  voluntary Patreon and Ko-fi donations. The only unit that matters for cost
+  governance is the request quota: 1,000 requests/day anonymously (max
+  30/minute) or 20,000 requests/day with a free API key, with higher limits
+  negotiable with the maintainer. For consumers, the FinOps concern is quota
+  stewardship (staying inside daily limits so integrations do not break) and
+  any optional recurring donation a team chooses to make to support the
+  service they depend on.
+notes: >-
+  Because there is no billing, no FOCUS-format billing export exists or will
+  exist. Treat the daily request quota as the budget: meter requests per
+  application, cache card and set data locally (card data changes rarely;
+  prices update daily), and consider a modest recurring donation as a line
+  item if the API is in a production dependency path.
+sources:
+- https://pokemontcg.io
+- https://docs.pokemontcg.io/getting-started/rate-limits
+- https://docs.pokemontcg.io/getting-started/authentication
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Pokémon TCG API
+serviceCategory: Gaming and Entertainment Data
+billingModel:
+  pricingCategory: Free
+  billingFrequency: None
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+focusColumns:
+  ServiceName: Pokémon TCG API
+  ServiceCategory: Gaming and Entertainment Data
+  ProviderName: Pokémon TCG API
+  PublisherName: Pokémon TCG API
+  InvoiceIssuerName: None (free community service)
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Free
+meters:
+- name: api_requests
+  description: HTTP requests against api.pokemontcg.io/v2, counted against the daily quota (1,000/day anonymous, 20,000/day keyed).
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - api-key
+  - application
+  - endpoint
+- name: anonymous_burst
+  description: Per-minute request rate for keyless clients, capped at 30/minute.
+  unit: requests
+  aggregation: max
+  dimensions:
+  - client
+- name: donations
+  description: Optional Patreon or Ko-fi contributions supporting the service (the only money that changes hands).
+  unit: USD
+  aggregation: sum
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Meter requests per application and per API key against the daily quota; alert well before the 1,000 or 20,000/day ceiling.
+- name: Allocation
+  description: Issue a separate free API key per application or team so quota consumption maps to its consumer.
+- name: Optimization
+  description: Cache aggressively - card and set data is nearly static and prices refresh only daily; use select to trim payloads, precise q queries to cut result pages, and pageSize=250 when bulk paging. Bulk data is also available in the open PokemonTCG/pokemon-tcg-data GitHub repo, which costs zero quota.
+- name: Accountability
+  description: Assign an owner for the shared quota; if the API sits in a production path, budget a recurring donation and a relationship with the maintainer for elevated limits.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

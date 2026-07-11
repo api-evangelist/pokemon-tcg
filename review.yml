@@ -1,0 +1,95 @@
+aid: pokemon-tcg
+name: Pokémon TCG API
+review:
+  question: Does the Pokémon TCG API expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-11'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. The Pokémon TCG API is a read-only,
+    request/response REST API over HTTPS (base https://api.pokemontcg.io/v2).
+    There is no server-push transport of any kind - no WebSocket, no
+    Server-Sent Events, and no webhooks. Card price data (TCGplayer and
+    Cardmarket) is refreshed on the server daily and consumed by polling the
+    same REST endpoints, so there is nothing event-driven to model.
+findings:
+  summary: |
+    The Pokémon TCG API does not publish a documented public WebSocket API.
+    It is a free, community-run REST API (created and maintained by Andrew
+    Backes) serving Pokémon Trading Card Game data - 20,000+ cards across
+    173 sets - at https://api.pokemontcg.io/v2. All eight documented
+    endpoints are simple HTTPS GETs: card search and retrieval, set search
+    and retrieval, and four metadata lists (types, subtypes, supertypes,
+    rarities). Authentication is an optional X-Api-Key header; anonymous
+    requests work at a reduced rate limit (1,000/day, 30/minute) while a
+    free key from dev.pokemontcg.io raises the default to 20,000/day.
+    Search uses a Lucene-like query syntax (keyword, phrase, AND/OR/NOT,
+    wildcard, exact, range, and nested-field matching) with orderBy, select,
+    and page/pageSize parameters. No realtime, bidirectional, or streaming
+    WebSocket (ws:// or wss://) endpoint appears anywhere in the
+    documentation as of the review date.
+  openSource: |
+    The API service itself is closed-source and free, funded by Patreon and
+    Ko-fi donations, but the underlying card data and all ten official SDKs
+    (Python, Ruby, JavaScript, TypeScript, C#, Kotlin, PHP, Go, Dart,
+    Elixir) are open on GitHub under the PokemonTCG organization
+    (github.com/PokemonTCG), including the pokemon-tcg-data card dataset.
+    The project is an independent community effort not affiliated with
+    Nintendo or The Pokémon Company.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.pokemontcg.io/v2
+      documented: true
+      note: Read-only GET endpoints for cards, sets, types, subtypes, supertypes, and rarities. Optional X-Api-Key header auth.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in the Pokémon TCG API docs as of the review date.
+    - protocol: Webhook
+      scheme: https
+      documented: false
+      note: No webhook or callback surface is documented; price updates land server-side daily and are consumed by polling.
+  endpointsConfirmedRest:
+    - GET https://api.pokemontcg.io/v2/cards
+    - GET https://api.pokemontcg.io/v2/cards/{id}
+    - GET https://api.pokemontcg.io/v2/sets
+    - GET https://api.pokemontcg.io/v2/sets/{id}
+    - GET https://api.pokemontcg.io/v2/types
+    - GET https://api.pokemontcg.io/v2/subtypes
+    - GET https://api.pokemontcg.io/v2/supertypes
+    - GET https://api.pokemontcg.io/v2/rarities
+sources:
+  - url: https://docs.pokemontcg.io
+    type: Documentation
+    note: Full API reference; every documented endpoint is a REST GET. No WebSocket mentioned.
+  - url: https://docs.pokemontcg.io/getting-started/authentication
+    type: Documentation
+    note: Optional X-Api-Key header; unauthenticated requests allowed at reduced limits.
+  - url: https://docs.pokemontcg.io/getting-started/rate-limits
+    type: Documentation
+    note: 20,000 requests/day default with a key; 1,000/day and 30/minute without.
+  - url: https://docs.pokemontcg.io/getting-started/errors
+    type: Documentation
+    note: Conventional HTTP status codes including 429 for rate limiting.
+  - url: https://docs.pokemontcg.io/api-reference/cards/search-cards
+    type: APIReference
+    note: Lucene-like q syntax, orderBy, select, page/pageSize (max 250).
+  - url: https://api.pokemontcg.io/v2/cards?pageSize=1
+    type: LiveAPI
+    note: Live probe confirmed 20,359 cards, TCGplayer/Cardmarket prices in payload, anonymous access working.
+  - url: https://api.pokemontcg.io/v2/sets?pageSize=1
+    type: LiveAPI
+    note: Live probe confirmed 173 sets.
+  - url: https://github.com/PokemonTCG
+    type: SourceCode
+    note: Open card dataset and ten official SDKs under the PokemonTCG GitHub organization.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. The Pokémon TCG API is a read-only
+    request/response REST API with no server-push transport (no WebSocket,
+    SSE, or webhooks), so there is no event-driven surface to model in an
+    AsyncAPI document.

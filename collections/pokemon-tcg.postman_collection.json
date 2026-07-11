@@ -1,0 +1,263 @@
+{
+  "info": {
+    "name": "Pokémon TCG API",
+    "description": "Free, community-run REST API for Pokémon Trading Card Game data - 20,000+ cards across 170+ sets with gameplay data, format legalities, hi-res images, and daily TCGplayer/Cardmarket prices. Base URL: https://api.pokemontcg.io/v2. Authentication is optional: requests without a key are limited to 1,000/day (max 30/minute); a free API key from https://dev.pokemontcg.io sent in the X-Api-Key header raises the default limit to 20,000/day. Search uses a Lucene-like q syntax (name:charizard, subtypes:mega -types:water, hp:[150 TO *], set.id:sm1).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Api-Key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.pokemontcg.io/v2",
+      "type": "string"
+    },
+    {
+      "key": "apiKey",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Cards",
+      "item": [
+        {
+          "name": "Search cards",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/cards?q=name:charizard subtypes:mega&page=1&pageSize=250&orderBy=-set.releaseDate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cards"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "name:charizard subtypes:mega",
+                  "description": "Lucene-like search query. Every card field is searchable, including nested fields (set.id:sm1, attacks.name:Spelunk, legalities.standard:banned). Supports phrases (name:\"venusaur v\"), OR groups, negation (-types:water), wildcards (name:char*), exact match (!name:charizard), and ranges (hp:[150 TO *])."
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page of data to access."
+                },
+                {
+                  "key": "pageSize",
+                  "value": "250",
+                  "description": "Maximum cards to return (default and max 250)."
+                },
+                {
+                  "key": "orderBy",
+                  "value": "-set.releaseDate",
+                  "description": "Field(s) to order results by; prefix with - for descending (e.g. name,-number)."
+                },
+                {
+                  "key": "select",
+                  "value": "",
+                  "description": "Comma delimited list of fields to return (e.g. id,name,rarity).",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Search for one or many cards given a Lucene-like search query. Returns paginated card objects with attacks, abilities, legalities, images, and TCGplayer/Cardmarket prices."
+          }
+        },
+        {
+          "name": "Get a card",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/cards/xy1-1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cards",
+                "xy1-1"
+              ]
+            },
+            "description": "Fetch the details of a single card by its ID (set ID plus card number, e.g. xy1-1 or base1-4)."
+          }
+        },
+        {
+          "name": "Search cards - original 151 Pokemon",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/cards?q=nationalPokedexNumbers:[1 TO 151]&select=id,name,nationalPokedexNumbers,set",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cards"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "nationalPokedexNumbers:[1 TO 151]",
+                  "description": "Inclusive range search - only cards featuring the original 151 Pokemon."
+                },
+                {
+                  "key": "select",
+                  "value": "id,name,nationalPokedexNumbers,set",
+                  "description": "Trim the response to just these fields."
+                }
+              ]
+            },
+            "description": "Example of a range search combined with field selection - all cards featuring the original 151 Pokemon."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sets",
+      "item": [
+        {
+          "name": "Search sets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sets?q=legalities.standard:legal&orderBy=-releaseDate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sets"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "legalities.standard:legal",
+                  "description": "Same Lucene-like query syntax as card search."
+                },
+                {
+                  "key": "orderBy",
+                  "value": "-releaseDate",
+                  "description": "Newest sets first."
+                }
+              ]
+            },
+            "description": "Search for one or many sets. Returns set objects with card counts, series, release dates, legalities, PTCGO codes, and symbol/logo images."
+          }
+        },
+        {
+          "name": "Get a set",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sets/base1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sets",
+                "base1"
+              ]
+            },
+            "description": "Fetch the details of a single set by its ID (e.g. base1, swsh1)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Metadata",
+      "item": [
+        {
+          "name": "Get types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/types",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "types"
+              ]
+            },
+            "description": "Returns all energy types (Colorless, Darkness, Dragon, Fairy, Fighting, Fire, Grass, Lightning, Metal, Psychic, Water)."
+          }
+        },
+        {
+          "name": "Get subtypes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/subtypes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "subtypes"
+              ]
+            },
+            "description": "Returns all card subtypes (Basic, Stage 1, Stage 2, EX, GX, V, VMAX, VSTAR, MEGA, TAG TEAM, Item, Supporter, Stadium, and more)."
+          }
+        },
+        {
+          "name": "Get supertypes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/supertypes",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "supertypes"
+              ]
+            },
+            "description": "Returns all card supertypes (Energy, Pokémon, Trainer)."
+          }
+        },
+        {
+          "name": "Get rarities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/rarities",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rarities"
+              ]
+            },
+            "description": "Returns all card rarities (Common, Uncommon, Rare, Rare Holo, Ultra Rare, Illustration Rare, Special Illustration Rare, and more)."
+          }
+        }
+      ]
+    }
+  ]
+}

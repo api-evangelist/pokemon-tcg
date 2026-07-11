@@ -1,0 +1,122 @@
+aid: pokemon-tcg
+url: https://raw.githubusercontent.com/api-evangelist/pokemon-tcg/refs/heads/main/apis.yml
+name: Pokémon TCG API
+kind: organization
+description: The Pokémon TCG API is a free, community-run REST API created and
+  maintained by Andrew Backes that serves Pokémon Trading Card Game data - more
+  than 20,000 cards across 170+ sets, from Base Set onward. Every card carries
+  full gameplay data (attacks, abilities, weaknesses, resistances, retreat
+  costs), format legalities, high-resolution card images, and daily-updated
+  market prices from TCGplayer and Cardmarket. A Lucene-like query syntax
+  supports keyword, phrase, wildcard, exact, range, and nested-field searches
+  across every field. The API works without authentication at a reduced rate
+  limit; a free API key from the developer portal, sent in the X-Api-Key
+  header, raises the limits. Official SDKs cover Python, Ruby, JavaScript,
+  TypeScript, C#, Kotlin, PHP, Go, Dart, and Elixir.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Pokemon
+- Trading Cards
+- TCG
+- Gaming
+- Card Games
+- Collectibles
+- Card Prices
+created: '2026-07-11'
+modified: '2026-07-11'
+specificationVersion: '0.19'
+apis:
+- aid: pokemon-tcg:pokemon-tcg-cards-api
+  name: Pokémon TCG Cards API
+  tags:
+  - Pokemon
+  - Cards
+  - Trading Cards
+  - Card Prices
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.pokemontcg.io/api-reference/cards/search-cards
+  baseURL: https://api.pokemontcg.io/v2
+  properties:
+  - url: https://docs.pokemontcg.io/api-reference/cards/card-object
+    type: Documentation
+  - url: https://docs.pokemontcg.io/api-reference/cards/search-cards
+    type: APIReference
+  - url: openapi/pokemon-tcg-openapi.yml
+    type: OpenAPI
+  description: Search and retrieve individual Pokémon, Trainer, and Energy
+    cards. Each card includes gameplay data (HP, attacks, abilities,
+    weaknesses, resistances, retreat cost), rarity, artist, flavor text,
+    National Pokédex numbers, format legalities, small and hi-res card images,
+    and daily-updated TCGplayer and Cardmarket prices. Supports Lucene-like
+    queries, ordering, field selection, and pagination up to 250 cards per page.
+- aid: pokemon-tcg:pokemon-tcg-sets-api
+  name: Pokémon TCG Sets API
+  tags:
+  - Pokemon
+  - Sets
+  - Expansions
+  - TCG
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.pokemontcg.io/api-reference/sets/search-sets
+  baseURL: https://api.pokemontcg.io/v2
+  properties:
+  - url: https://docs.pokemontcg.io/api-reference/sets/set-object
+    type: Documentation
+  - url: https://docs.pokemontcg.io/api-reference/sets/search-sets
+    type: APIReference
+  - url: openapi/pokemon-tcg-openapi.yml
+    type: OpenAPI
+  description: Search and retrieve trading card game sets (expansions) - Base
+    Set through the latest series - with printed and total card counts, series
+    grouping, release dates, Pokémon TCG Online/Live codes, format legalities,
+    and set symbol and logo images. Uses the same query, ordering, selection,
+    and pagination parameters as the Cards API.
+- aid: pokemon-tcg:pokemon-tcg-metadata-api
+  name: Pokémon TCG Metadata API
+  tags:
+  - Pokemon
+  - Types
+  - Rarities
+  - Reference Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.pokemontcg.io/api-reference/types/get-types
+  baseURL: https://api.pokemontcg.io/v2
+  properties:
+  - url: https://docs.pokemontcg.io/api-reference/types/get-types
+    type: Documentation
+  - url: https://docs.pokemontcg.io/api-reference/rarities/get-rarities
+    type: APIReference
+  - url: openapi/pokemon-tcg-openapi.yml
+    type: OpenAPI
+  description: The controlled vocabularies used across the card catalog - the
+    eleven energy types (Fire, Water, Grass, Lightning, and the rest), forty
+    card subtypes (Basic, Stage 1, EX, GX, V, VMAX, TAG TEAM, Item, Supporter,
+    Stadium, and more), the three supertypes (Energy, Pokémon, Trainer), and
+    all card rarities. Useful for building search filters and validating
+    queries against the Cards and Sets APIs.
+common:
+- type: Website
+  url: https://pokemontcg.io
+- type: Documentation
+  url: https://docs.pokemontcg.io
+- type: GitHubOrganization
+  url: https://github.com/PokemonTCG
+- type: PortalSignup
+  url: https://dev.pokemontcg.io
+- type: SDKs
+  url: https://docs.pokemontcg.io/sdks/overview
+- type: RateLimitsDocumentation
+  url: https://docs.pokemontcg.io/getting-started/rate-limits
+- type: Authentication
+  url: https://docs.pokemontcg.io/getting-started/authentication
+- type: Errors
+  url: https://docs.pokemontcg.io/getting-started/errors
+- type: Plans
+  url: plans/pokemon-tcg-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/pokemon-tcg-rate-limits.yml
+- type: FinOps
+  url: finops/pokemon-tcg-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

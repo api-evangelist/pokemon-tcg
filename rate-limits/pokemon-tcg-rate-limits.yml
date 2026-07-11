@@ -1,0 +1,73 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Pokémon TCG API
+providerId: pokemon-tcg
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Pokemon
+- Trading Cards
+- TCG
+- Gaming
+- Rate Limiting
+- Quotas
+description: >-
+  The Pokémon TCG API publishes explicit numeric rate limits that depend on
+  whether a request carries an API key. Without a key, requests are limited
+  to 1,000 per day and a maximum of 30 per minute. With a free API key from
+  the Pokémon TCG Developer Portal (sent via the X-Api-Key header), the
+  default limit is 20,000 requests per day, and higher limits can be
+  arranged by contacting the maintainer via Discord or email. The deprecated
+  v1 API throttles all third-party applications to 30 requests per minute.
+  Exceeding a limit returns HTTP 429.
+notes: >-
+  Limits exist to keep the free, donation-funded service responsive - each
+  request has a real computational cost to the maintainer. Batch requests
+  economically: pageSize goes up to 250, the select parameter trims response
+  payloads, and the q syntax narrows result sets so fewer pages are needed.
+sources:
+- https://docs.pokemontcg.io/getting-started/rate-limits
+- https://docs.pokemontcg.io/getting-started/authentication
+- https://docs.pokemontcg.io/getting-started/errors
+responseCodes:
+  throttled: 429
+limits:
+- name: Anonymous Daily Requests
+  scope: client
+  metric: requests
+  limit: 1000/day
+  notes: Applies to all requests made without an X-Api-Key header.
+- name: Anonymous Per-Minute Requests
+  scope: client
+  metric: requests
+  limit: 30/minute
+  notes: Enforced alongside the daily cap for keyless requests.
+- name: Keyed Daily Requests (Default)
+  scope: api-key
+  metric: requests
+  limit: 20000/day
+  notes: Default for free API keys from dev.pokemontcg.io; higher limits available on request via Discord or email.
+- name: V1 API Requests (Deprecated)
+  scope: client
+  metric: requests
+  limit: 30/minute
+  notes: The deprecated v1 API throttles all third-party applications to 30 requests per minute.
+- name: Page Size
+  scope: request
+  metric: results
+  limit: 250 per page
+  notes: pageSize defaults to 250 and cannot exceed 250; use page to iterate.
+policies:
+- name: Optional Authentication
+  description: Requests without an API key do not fail - they simply run under drastically reduced rate limits.
+- name: Economical Use
+  description: The maintainer encourages integrations to minimize requests - use select to trim fields, precise q queries to narrow results, and the maximum pageSize of 250 when paging through data.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on HTTP 429 responses and spread bulk syncs across the day.
+- name: Elevated Limits
+  description: Higher daily limits are granted case-by-case by contacting the maintainer via Discord or email; donations via Patreon or Ko-fi help fund server capacity.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

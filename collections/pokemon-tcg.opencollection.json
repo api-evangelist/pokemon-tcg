@@ -1,0 +1,193 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pokémon TCG API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "X-Api-Key",
+        "value": "{{apiKey}}",
+        "placement": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search cards.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pokemontcg.io/v2/cards",
+            "params": [
+              {
+                "name": "q",
+                "value": "name:charizard subtypes:mega",
+                "type": "query",
+                "description": "Lucene-like search query. Every card field is searchable, including nested fields (set.id:sm1, legalities.standard:banned), wildcards (name:char*), exact match (!name:charizard), and ranges (hp:[150 TO *])."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "The page of data to access."
+              },
+              {
+                "name": "pageSize",
+                "value": "250",
+                "type": "query",
+                "description": "Maximum cards to return (default and max 250)."
+              },
+              {
+                "name": "orderBy",
+                "value": "-set.releaseDate",
+                "type": "query",
+                "description": "Field(s) to order results by; prefix with - for descending."
+              },
+              {
+                "name": "select",
+                "value": "",
+                "type": "query",
+                "description": "Comma delimited list of fields to return (e.g. id,name,rarity)."
+              }
+            ]
+          },
+          "docs": "Search for one or many cards given a Lucene-like search query. Returns paginated card objects with attacks, abilities, legalities, images, and TCGplayer/Cardmarket prices."
+        },
+        {
+          "info": {
+            "name": "Get a card.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pokemontcg.io/v2/cards/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "xy1-1",
+                "type": "path",
+                "description": "The ID of the card (set ID plus card number, e.g. xy1-1)."
+              }
+            ]
+          },
+          "docs": "Fetch the details of a single card by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search sets.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pokemontcg.io/v2/sets",
+            "params": [
+              {
+                "name": "q",
+                "value": "legalities.standard:legal",
+                "type": "query",
+                "description": "Same Lucene-like query syntax as card search."
+              },
+              {
+                "name": "orderBy",
+                "value": "-releaseDate",
+                "type": "query",
+                "description": "Newest sets first."
+              }
+            ]
+          },
+          "docs": "Search for one or many sets. Returns set objects with card counts, series, release dates, legalities, PTCGO codes, and symbol/logo images."
+        },
+        {
+          "info": {
+            "name": "Get a set.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pokemontcg.io/v2/sets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "base1",
+                "type": "path",
+                "description": "The ID of the set (e.g. base1, swsh1)."
+              }
+            ]
+          },
+          "docs": "Fetch the details of a single set by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get types.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pokemontcg.io/v2/types"
+          },
+          "docs": "Returns all energy types (Colorless, Darkness, Dragon, Fairy, Fighting, Fire, Grass, Lightning, Metal, Psychic, Water)."
+        },
+        {
+          "info": {
+            "name": "Get subtypes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pokemontcg.io/v2/subtypes"
+          },
+          "docs": "Returns all card subtypes (Basic, Stage 1, Stage 2, EX, GX, V, VMAX, VSTAR, MEGA, TAG TEAM, Item, Supporter, Stadium, and more)."
+        },
+        {
+          "info": {
+            "name": "Get supertypes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pokemontcg.io/v2/supertypes"
+          },
+          "docs": "Returns all card supertypes (Energy, Pokémon, Trainer)."
+        },
+        {
+          "info": {
+            "name": "Get rarities.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pokemontcg.io/v2/rarities"
+          },
+          "docs": "Returns all card rarities (Common, Uncommon, Rare, Rare Holo, Ultra Rare, Illustration Rare, Special Illustration Rare, and more)."
+        }
+      ]
+    }
+  ]
+}

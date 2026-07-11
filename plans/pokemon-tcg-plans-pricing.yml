@@ -1,0 +1,116 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Pokémon TCG API
+providerId: pokemon-tcg
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Pokemon
+- Trading Cards
+- TCG
+- Gaming
+- Free
+- Plans
+description: >-
+  The Pokémon TCG API is completely free - there is no paid tier. Access
+  differs only by rate limit. Anonymous requests (no API key) are limited to
+  1,000 requests/day with a maximum of 30 requests/minute. Signing up for a
+  free API key at the Pokémon TCG Developer Portal (dev.pokemontcg.io) and
+  sending it in the X-Api-Key header raises the default limit to 20,000
+  requests/day, and higher limits can be arranged by contacting the
+  maintainer via Discord or email. The project is a community effort by
+  Andrew Backes, sustained by voluntary Patreon and Ko-fi donations rather
+  than by charging for access.
+notes: >-
+  There is no billing relationship, no credit card, and no commercial tier.
+  The 20,000/day keyed limit is described as a default that can be raised on
+  request. Donations via Patreon or Ko-fi help fund server performance but do
+  not purchase a formal SLA or higher limits.
+sources:
+- https://pokemontcg.io
+- https://docs.pokemontcg.io/getting-started/authentication
+- https://docs.pokemontcg.io/getting-started/rate-limits
+- https://dev.pokemontcg.io
+plans:
+- id: pokemon-tcg-anonymous
+  name: Anonymous (No API Key)
+  type: free
+  description: >-
+    Use the full API without signing up. All endpoints (cards, sets, types,
+    subtypes, supertypes, rarities) are available, with drastically reduced
+    rate limits.
+  entries:
+  - label: Daily Requests
+    name: anonymous_daily_requests
+    type: usage
+    metric: requests
+    limit: 1000
+    timeFrame: day
+    geo: global
+    unit: 1
+    price: free
+    userMultiplied: false
+  - label: Per-Minute Requests
+    name: anonymous_minute_requests
+    type: usage
+    metric: requests
+    limit: 30
+    timeFrame: minute
+    geo: global
+    unit: 1
+    price: free
+    userMultiplied: false
+  elements:
+  - name: Card Search and Retrieval
+  - name: Set Search and Retrieval
+  - name: Types, Subtypes, Supertypes, Rarities
+  - name: TCGplayer and Cardmarket Prices
+  - name: Hi-Res Card Images
+- id: pokemon-tcg-free-api-key
+  name: Free API Key
+  type: free
+  description: >-
+    Sign up at the Pokémon TCG Developer Portal (dev.pokemontcg.io) for a
+    free API key, sent in the X-Api-Key header. Same endpoints as anonymous
+    access, with a much higher default rate limit.
+  entries:
+  - label: Daily Requests
+    name: keyed_daily_requests
+    type: usage
+    metric: requests
+    limit: 20000
+    timeFrame: day
+    geo: global
+    unit: 1
+    price: free
+    userMultiplied: false
+  elements:
+  - name: Everything in Anonymous
+  - name: 20x Higher Daily Limit
+  - name: Key Regeneration at Any Time
+- id: pokemon-tcg-elevated
+  name: Elevated Limits (By Request)
+  type: free
+  description: >-
+    Developers who need more than the default 20,000 requests/day can contact
+    the maintainer via Discord or email to discuss a higher limit. No charge
+    is published; supporting the project via Patreon or Ko-fi is encouraged.
+  entries:
+  - label: Daily Requests
+    name: elevated_daily_requests
+    type: usage
+    metric: requests
+    limit: -1
+    timeFrame: day
+    geo: global
+    unit: 1
+    price: free (negotiated with maintainer; donations encouraged)
+    userMultiplied: false
+  elements:
+  - name: Custom Rate Limits
+  - name: Direct Contact with Maintainer
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
