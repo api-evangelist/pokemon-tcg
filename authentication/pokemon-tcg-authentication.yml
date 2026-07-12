@@ -1,0 +1,18 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/pokemon-tcg-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-Api-Key
+  description: Optional API key from the Pokémon TCG Developer Portal (https://dev.pokemontcg.io).
+    Requests without a key still work but are rate limited to 1,000 requests/day (max 30/minute);
+    a free key raises the default limit to 20,000 requests/day.
+  sources:
+  - openapi/pokemon-tcg-openapi.yml

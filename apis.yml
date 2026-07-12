@@ -95,6 +95,10 @@ apis:
     all card rarities. Useful for building search filters and validating
     queries against the Cards and Sets APIs.
 common:
+- type: DomainSecurity
+  url: security/pokemon-tcg-domain-security.yml
+- type: Authentication
+  url: authentication/pokemon-tcg-authentication.yml
 - type: Website
   url: https://pokemontcg.io
 - type: Documentation
