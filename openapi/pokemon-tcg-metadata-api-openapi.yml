@@ -1,0 +1,107 @@
+openapi: 3.0.3
+info:
+  title: Pokémon TCG Cards Metadata API
+  description: The Pokémon TCG API is a free, community-run REST API (created and maintained by Andrew Backes) that serves Pokémon Trading Card Game data - every card across every set, with attacks, abilities, weaknesses, resistances, format legalities, high-resolution card images, and current market prices from TCGplayer and Cardmarket. The read-only surface covers cards, sets, and the metadata vocabularies (types, subtypes, supertypes, and rarities) used to filter them. Card and set search uses a Lucene-like query syntax via the q parameter - keyword and phrase matching, AND/OR/NOT logic, wildcards, exact matching, inclusive/exclusive range searches, and dot-notation nested-field filters (for example set.id:sm1 or legalities.standard:banned). Requests work without authentication at a reduced rate limit; a free API key from the Pokémon TCG Developer Portal (https://dev.pokemontcg.io), sent in the X-Api-Key header, raises the limits substantially.
+  version: '2.0'
+  contact:
+    name: Pokémon TCG API
+    url: https://pokemontcg.io
+  license:
+    name: MIT
+    url: https://github.com/PokemonTCG/pokemon-tcg-data/blob/master/LICENSE
+servers:
+- url: https://api.pokemontcg.io/v2
+  description: Production
+security:
+- {}
+- apiKeyAuth: []
+tags:
+- name: Metadata
+  description: The controlled vocabularies used across cards - energy types, card subtypes, supertypes, and rarities.
+paths:
+  /types:
+    get:
+      operationId: getTypes
+      tags:
+      - Metadata
+      summary: Get types
+      description: Returns all energy types used on cards - Colorless, Darkness, Dragon, Fairy, Fighting, Fire, Grass, Lightning, Metal, Psychic, and Water.
+      responses:
+        '200':
+          $ref: '#/components/responses/StringList'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /subtypes:
+    get:
+      operationId: getSubtypes
+      tags:
+      - Metadata
+      summary: Get subtypes
+      description: Returns all card subtypes - Basic, Stage 1, Stage 2, EX, GX, V, VMAX, VSTAR, MEGA, BREAK, TAG TEAM, Item, Supporter, Stadium, and the rest.
+      responses:
+        '200':
+          $ref: '#/components/responses/StringList'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /supertypes:
+    get:
+      operationId: getSupertypes
+      tags:
+      - Metadata
+      summary: Get supertypes
+      description: Returns all card supertypes - Energy, Pokémon, and Trainer.
+      responses:
+        '200':
+          $ref: '#/components/responses/StringList'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /rarities:
+    get:
+      operationId: getRarities
+      tags:
+      - Metadata
+      summary: Get rarities
+      description: Returns all card rarities - Common, Uncommon, Rare, Rare Holo, Ultra Rare, Illustration Rare, Special Illustration Rare, Amazing Rare, Radiant Rare, Promo, and the rest.
+      responses:
+        '200':
+          $ref: '#/components/responses/StringList'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Bad Request. Your request is either malformed, or is missing one or more required fields.
+            code:
+              type: integer
+              example: 400
+  responses:
+    TooManyRequests:
+      description: The rate limit has been exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    StringList:
+      description: A list of string values.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  type: string
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: Optional API key from the Pokémon TCG Developer Portal (https://dev.pokemontcg.io). Requests without a key still work but are rate limited to 1,000 requests/day (max 30/minute); a free key raises the default limit to 20,000 requests/day.

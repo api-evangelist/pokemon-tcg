@@ -1,0 +1,223 @@
+openapi: 3.0.3
+info:
+  title: Pokémon TCG Cards Sets API
+  description: The Pokémon TCG API is a free, community-run REST API (created and maintained by Andrew Backes) that serves Pokémon Trading Card Game data - every card across every set, with attacks, abilities, weaknesses, resistances, format legalities, high-resolution card images, and current market prices from TCGplayer and Cardmarket. The read-only surface covers cards, sets, and the metadata vocabularies (types, subtypes, supertypes, and rarities) used to filter them. Card and set search uses a Lucene-like query syntax via the q parameter - keyword and phrase matching, AND/OR/NOT logic, wildcards, exact matching, inclusive/exclusive range searches, and dot-notation nested-field filters (for example set.id:sm1 or legalities.standard:banned). Requests work without authentication at a reduced rate limit; a free API key from the Pokémon TCG Developer Portal (https://dev.pokemontcg.io), sent in the X-Api-Key header, raises the limits substantially.
+  version: '2.0'
+  contact:
+    name: Pokémon TCG API
+    url: https://pokemontcg.io
+  license:
+    name: MIT
+    url: https://github.com/PokemonTCG/pokemon-tcg-data/blob/master/LICENSE
+servers:
+- url: https://api.pokemontcg.io/v2
+  description: Production
+security:
+- {}
+- apiKeyAuth: []
+tags:
+- name: Sets
+  description: Trading card game sets (expansions), from Base Set onward.
+paths:
+  /sets:
+    get:
+      operationId: searchSets
+      tags:
+      - Sets
+      summary: Search sets
+      description: Search for one or many sets using the same Lucene-like query syntax as card search, for example legalities.standard:legal or series:base.
+      parameters:
+      - name: q
+        in: query
+        required: false
+        description: The search query.
+        schema:
+          type: string
+        example: legalities.standard:legal
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/OrderBy'
+      - $ref: '#/components/parameters/Select'
+      responses:
+        '200':
+          description: A paginated list of sets matching the query.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Set'
+                  page:
+                    type: integer
+                  pageSize:
+                    type: integer
+                  count:
+                    type: integer
+                  totalCount:
+                    type: integer
+                    example: 173
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /sets/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: The ID of the set, for example base1 or swsh1.
+      schema:
+        type: string
+      example: base1
+    get:
+      operationId: getSet
+      tags:
+      - Sets
+      summary: Get a set
+      description: Fetch the details of a single set by its ID (for example base1 or swsh1).
+      responses:
+        '200':
+          description: The requested set.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Set'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+components:
+  parameters:
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      description: The maximum number of results to return (max 250).
+      schema:
+        type: integer
+        default: 250
+        maximum: 250
+    OrderBy:
+      name: orderBy
+      in: query
+      required: false
+      description: The field(s) to order the results by, comma delimited. Prefix a field with a hyphen for descending order, for example orderBy=name,-number or orderBy=-set.releaseDate.
+      schema:
+        type: string
+      example: name,-number
+    Page:
+      name: page
+      in: query
+      required: false
+      description: The page of data to access.
+      schema:
+        type: integer
+        default: 1
+        minimum: 1
+    Select:
+      name: select
+      in: query
+      required: false
+      description: A comma delimited list of fields to return in the response, for example select=id,name,rarity. All fields are returned by default.
+      schema:
+        type: string
+      example: id,name,rarity
+  schemas:
+    Legalities:
+      type: object
+      description: Format legality (legal or banned) where present.
+      properties:
+        standard:
+          type: string
+          example: Legal
+        expanded:
+          type: string
+          example: Legal
+        unlimited:
+          type: string
+          example: Legal
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Bad Request. Your request is either malformed, or is missing one or more required fields.
+            code:
+              type: integer
+              example: 400
+    Set:
+      type: object
+      description: A Pokémon Trading Card Game set (expansion).
+      properties:
+        id:
+          type: string
+          example: base1
+        name:
+          type: string
+          example: Base
+        series:
+          type: string
+          example: Base
+        printedTotal:
+          type: integer
+          description: The number printed on cards in the set.
+          example: 102
+        total:
+          type: integer
+          description: The total number of cards in the set, including secret rares.
+          example: 102
+        legalities:
+          $ref: '#/components/schemas/Legalities'
+        ptcgoCode:
+          type: string
+          description: The code used in Pokémon TCG Online / Live.
+          example: BS
+        releaseDate:
+          type: string
+          example: 1999/01/09
+        updatedAt:
+          type: string
+          example: 2022/10/10 15:12:00
+        images:
+          type: object
+          properties:
+            symbol:
+              type: string
+              format: uri
+            logo:
+              type: string
+              format: uri
+  responses:
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was unacceptable, often due to an incorrect query string parameter.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: The rate limit has been exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: Optional API key from the Pokémon TCG Developer Portal (https://dev.pokemontcg.io). Requests without a key still work but are rate limited to 1,000 requests/day (max 30/minute); a free key raises the default limit to 20,000 requests/day.
