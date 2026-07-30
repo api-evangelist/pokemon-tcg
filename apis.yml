@@ -13,7 +13,20 @@ description: The Pokémon TCG API is a free, community-run REST API created and
   limit; a free API key from the developer portal, sent in the X-Api-Key
   header, raises the limits. Official SDKs cover Python, Ruby, JavaScript,
   TypeScript, C#, Kotlin, PHP, Go, Dart, and Elixir.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: open
+  trial: false
+  try_now: true
+  public: true
+  label: Free · Open access
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/pokemon-tcg.png
 tags:
 - Pokemon
 - Trading Cards
@@ -27,73 +40,74 @@ modified: '2026-07-11'
 specificationVersion: '0.19'
 apis:
 - aid: pokemon-tcg:pokemon-tcg-cards-api
-  name: Pokémon TCG Cards API
-  tags:
-  - Pokemon
-  - Cards
-  - Trading Cards
-  - Card Prices
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  name: Pokémon TCG API Cards API
+  description: >-
+    Individual Pokémon, Trainer, and Energy cards with full gameplay data, images, legalities, and market
+    prices.
   humanURL: https://docs.pokemontcg.io/api-reference/cards/search-cards
   baseURL: https://api.pokemontcg.io/v2
-  properties:
-  - url: https://docs.pokemontcg.io/api-reference/cards/card-object
-    type: Documentation
-  - url: https://docs.pokemontcg.io/api-reference/cards/search-cards
-    type: APIReference
-  - url: openapi/pokemon-tcg-openapi.yml
-    type: OpenAPI
-  description: Search and retrieve individual Pokémon, Trainer, and Energy
-    cards. Each card includes gameplay data (HP, attacks, abilities,
-    weaknesses, resistances, retreat cost), rarity, artist, flavor text,
-    National Pokédex numbers, format legalities, small and hi-res card images,
-    and daily-updated TCGplayer and Cardmarket prices. Supports Lucene-like
-    queries, ordering, field selection, and pagination up to 250 cards per page.
-- aid: pokemon-tcg:pokemon-tcg-sets-api
-  name: Pokémon TCG Sets API
   tags:
-  - Pokemon
-  - Sets
-  - Expansions
-  - TCG
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.pokemontcg.io/api-reference/sets/search-sets
-  baseURL: https://api.pokemontcg.io/v2
+  - Cards
   properties:
-  - url: https://docs.pokemontcg.io/api-reference/sets/set-object
-    type: Documentation
-  - url: https://docs.pokemontcg.io/api-reference/sets/search-sets
-    type: APIReference
-  - url: openapi/pokemon-tcg-openapi.yml
-    type: OpenAPI
-  description: Search and retrieve trading card game sets (expansions) - Base
-    Set through the latest series - with printed and total card counts, series
-    grouping, release dates, Pokémon TCG Online/Live codes, format legalities,
-    and set symbol and logo images. Uses the same query, ordering, selection,
-    and pagination parameters as the Cards API.
+  - type: OpenAPI
+    url: openapi/pokemon-tcg-cards-api-openapi.yml
+  - type: Documentation
+    url: https://docs.pokemontcg.io/api-reference/cards/card-object
+  - type: APIReference
+    url: https://docs.pokemontcg.io/api-reference/cards/search-cards
+  - type: Documentation
+    url: https://docs.pokemontcg.io/api-reference/sets/set-object
+  - type: APIReference
+    url: https://docs.pokemontcg.io/api-reference/sets/search-sets
+  - type: Documentation
+    url: https://docs.pokemontcg.io/api-reference/types/get-types
+  - type: APIReference
+    url: https://docs.pokemontcg.io/api-reference/rarities/get-rarities
 - aid: pokemon-tcg:pokemon-tcg-metadata-api
-  name: Pokémon TCG Metadata API
-  tags:
-  - Pokemon
-  - Types
-  - Rarities
-  - Reference Data
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.pokemontcg.io/api-reference/types/get-types
+  name: Pokémon TCG API Metadata API
+  description: >-
+    The controlled vocabularies used across cards - energy types, card subtypes, supertypes, and rarities.
+  humanURL: https://docs.pokemontcg.io/api-reference/cards/search-cards
   baseURL: https://api.pokemontcg.io/v2
+  tags:
+  - Metadata
   properties:
-  - url: https://docs.pokemontcg.io/api-reference/types/get-types
-    type: Documentation
-  - url: https://docs.pokemontcg.io/api-reference/rarities/get-rarities
-    type: APIReference
-  - url: openapi/pokemon-tcg-openapi.yml
-    type: OpenAPI
-  description: The controlled vocabularies used across the card catalog - the
-    eleven energy types (Fire, Water, Grass, Lightning, and the rest), forty
-    card subtypes (Basic, Stage 1, EX, GX, V, VMAX, TAG TEAM, Item, Supporter,
-    Stadium, and more), the three supertypes (Energy, Pokémon, Trainer), and
-    all card rarities. Useful for building search filters and validating
-    queries against the Cards and Sets APIs.
+  - type: OpenAPI
+    url: openapi/pokemon-tcg-metadata-api-openapi.yml
+  - type: Documentation
+    url: https://docs.pokemontcg.io/api-reference/cards/card-object
+  - type: APIReference
+    url: https://docs.pokemontcg.io/api-reference/cards/search-cards
+  - type: Documentation
+    url: https://docs.pokemontcg.io/api-reference/sets/set-object
+  - type: APIReference
+    url: https://docs.pokemontcg.io/api-reference/sets/search-sets
+  - type: Documentation
+    url: https://docs.pokemontcg.io/api-reference/types/get-types
+  - type: APIReference
+    url: https://docs.pokemontcg.io/api-reference/rarities/get-rarities
+- aid: pokemon-tcg:pokemon-tcg-sets-api
+  name: Pokémon TCG API Sets API
+  description: Trading card game sets (expansions), from Base Set onward.
+  humanURL: https://docs.pokemontcg.io/api-reference/cards/search-cards
+  baseURL: https://api.pokemontcg.io/v2
+  tags:
+  - Sets
+  properties:
+  - type: OpenAPI
+    url: openapi/pokemon-tcg-sets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.pokemontcg.io/api-reference/cards/card-object
+  - type: APIReference
+    url: https://docs.pokemontcg.io/api-reference/cards/search-cards
+  - type: Documentation
+    url: https://docs.pokemontcg.io/api-reference/sets/set-object
+  - type: APIReference
+    url: https://docs.pokemontcg.io/api-reference/sets/search-sets
+  - type: Documentation
+    url: https://docs.pokemontcg.io/api-reference/types/get-types
+  - type: APIReference
+    url: https://docs.pokemontcg.io/api-reference/rarities/get-rarities
 common:
 - type: AgenticAccess
   url: agentic-access/pokemon-tcg-agentic-access.yml
