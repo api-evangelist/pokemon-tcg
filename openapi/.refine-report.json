@@ -1,0 +1,18 @@
+{
+  "provider": "pokemon-tcg",
+  "sources": [
+    "pokemon-tcg-cards-api-openapi.yml",
+    "pokemon-tcg-metadata-api-openapi.yml",
+    "pokemon-tcg-sets-api-openapi.yml"
+  ],
+  "outputs": [
+    "pokemon-tcg-cards-api-openapi.yml",
+    "pokemon-tcg-metadata-api-openapi.yml",
+    "pokemon-tcg-sets-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
