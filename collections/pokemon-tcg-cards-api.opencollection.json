@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pokémon TCG Cards API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search cards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pokemontcg.io/v2/cards",
+            "params": [
+              {
+                "name": "q",
+                "value": "name:charizard subtypes:mega",
+                "type": "query",
+                "description": "The search query, using the Lucene-like syntax. Example: name:charizard (subtypes:mega OR subtypes:vmax)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of data to access."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return (max 250)."
+              },
+              {
+                "name": "orderBy",
+                "value": "name,-number",
+                "type": "query",
+                "description": "The field(s) to order the results by, comma delimited. Prefix a field with a hyphen for descending order, for example orderBy=name,-number or orderBy=-set.releaseDate."
+              },
+              {
+                "name": "select",
+                "value": "id,name,rarity",
+                "type": "query",
+                "description": "A comma delimited list of fields to return in the response, for example select=id,name,rarity. All fields are returned by default."
+              }
+            ]
+          },
+          "docs": "Search for one or many cards given a Lucene-like search query. Every field in the card object is searchable, including nested fields via dot notation (set.id, attacks.name, legalities.standard). Supports keyword and phrase matching, AND/OR/NOT logic, wildcards (name:char*), exact matching (!name:charizard), and range searches (hp:[150 TO *], nationalPokedexNumbers:[1 TO 151])."
+        },
+        {
+          "info": {
+            "name": "Get a card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pokemontcg.io/v2/cards/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "xy1-1",
+                "type": "path",
+                "description": "The ID of the card, for example xy1-1 or base1-4."
+              }
+            ]
+          },
+          "docs": "Fetch the details of a single card by its ID (for example xy1-1)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

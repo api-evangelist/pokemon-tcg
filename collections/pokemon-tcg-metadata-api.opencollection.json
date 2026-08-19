@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pokémon TCG Cards Metadata API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pokemontcg.io/v2/types"
+          },
+          "docs": "Returns all energy types used on cards - Colorless, Darkness, Dragon, Fairy, Fighting, Fire, Grass, Lightning, Metal, Psychic, and Water."
+        },
+        {
+          "info": {
+            "name": "Get subtypes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pokemontcg.io/v2/subtypes"
+          },
+          "docs": "Returns all card subtypes - Basic, Stage 1, Stage 2, EX, GX, V, VMAX, VSTAR, MEGA, BREAK, TAG TEAM, Item, Supporter, Stadium, and the rest."
+        },
+        {
+          "info": {
+            "name": "Get supertypes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pokemontcg.io/v2/supertypes"
+          },
+          "docs": "Returns all card supertypes - Energy, Pokémon, and Trainer."
+        },
+        {
+          "info": {
+            "name": "Get rarities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pokemontcg.io/v2/rarities"
+          },
+          "docs": "Returns all card rarities - Common, Uncommon, Rare, Rare Holo, Ultra Rare, Illustration Rare, Special Illustration Rare, Amazing Rare, Radiant Rare, Promo, and the rest."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

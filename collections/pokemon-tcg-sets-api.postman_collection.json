@@ -1,0 +1,445 @@
+{
+  "item": [
+    {
+      "id": "e6eaf121-92a9-4f74-bb66-c37c065e750f",
+      "name": "Sets",
+      "description": {
+        "content": "Trading card game sets (expansions), from Base Set onward.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e3dbb6b5-167c-4d41-904f-efff2562983e",
+          "name": "Search sets",
+          "request": {
+            "name": "Search sets",
+            "description": {
+              "content": "Search for one or many sets using the same Lucene-like query syntax as card search, for example legalities.standard:legal or series:base.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "The search query."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page of data to access."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "250",
+                  "description": "The maximum number of results to return (max 250)."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "The field(s) to order the results by, comma delimited. Prefix a field with a hyphen for descending order, for example orderBy=name,-number or orderBy=-set.releaseDate."
+                },
+                {
+                  "disabled": false,
+                  "key": "select",
+                  "value": "<string>",
+                  "description": "A comma delimited list of fields to return in the response, for example select=id,name,rarity. All fields are returned by default."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "63313501-087b-4d67-8792-426336753a9d",
+              "name": "A paginated list of sets matching the query.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "legalities.standard:legal"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "250"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name,-number"
+                    },
+                    {
+                      "key": "select",
+                      "value": "id,name,rarity"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"base1\",\n      \"name\": \"Base\",\n      \"series\": \"Base\",\n      \"printedTotal\": 102,\n      \"total\": 102,\n      \"legalities\": {\n        \"standard\": \"Legal\",\n        \"expanded\": \"Legal\",\n        \"unlimited\": \"Legal\"\n      },\n      \"ptcgoCode\": \"BS\",\n      \"releaseDate\": \"1999/01/09\",\n      \"updatedAt\": \"2022/10/10 15:12:00\",\n      \"images\": {\n        \"symbol\": \"https://EzaWVDnukUqTTuxRhcRNMDgUVykj.llvPY,IpL-S7AJfJYePj1lMEKLA+X7HEjM-kVpEyBqQ6Fxz-FpkYY+\",\n        \"logo\": \"http://qxzzDvtZLfUZIQx.ohlqtjVV91kV3ds9Riaerk20iB8hAoqpzd\"\n      }\n    },\n    {\n      \"id\": \"base1\",\n      \"name\": \"Base\",\n      \"series\": \"Base\",\n      \"printedTotal\": 102,\n      \"total\": 102,\n      \"legalities\": {\n        \"standard\": \"Legal\",\n        \"expanded\": \"Legal\",\n        \"unlimited\": \"Legal\"\n      },\n      \"ptcgoCode\": \"BS\",\n      \"releaseDate\": \"1999/01/09\",\n      \"updatedAt\": \"2022/10/10 15:12:00\",\n      \"images\": {\n        \"symbol\": \"https://QDpiMfPhJEOIDhYp.auKfaB797H8q5UQTSuHCNRrRjU6wJXO.c.lpiyTaFrj4,PuxWJ7IdFwnlYPaHyAIUdQS\",\n        \"logo\": \"https://y.rfsnOwuiUat2t6vxSoBW5G,aARFG6bHOQrfM,AX\"\n      }\n    }\n  ],\n  \"page\": 7793,\n  \"pageSize\": 1169,\n  \"count\": 7674,\n  \"totalCount\": 173\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "804b10fb-5a95-4365-85c5-755d6a17bdd1",
+              "name": "The request was unacceptable, often due to an incorrect query string parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "legalities.standard:legal"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "250"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name,-number"
+                    },
+                    {
+                      "key": "select",
+                      "value": "id,name,rarity"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Bad Request. Your request is either malformed, or is missing one or more required fields.\",\n    \"code\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "386d29a0-2544-436b-94bc-0aa04950bdb6",
+              "name": "The rate limit has been exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "legalities.standard:legal"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "250"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name,-number"
+                    },
+                    {
+                      "key": "select",
+                      "value": "id,name,rarity"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Bad Request. Your request is either malformed, or is missing one or more required fields.\",\n    \"code\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "942de2e2-6049-4d0a-9286-ebe2d73842cc",
+          "name": "Get a set",
+          "request": {
+            "name": "Get a set",
+            "description": {
+              "content": "Fetch the details of a single set by its ID (for example base1 or swsh1).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sets",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the set, for example base1 or swsh1."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "18377cc4-dc52-447d-a780-bc74f8c9cf5a",
+              "name": "The requested set.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the set, for example base1 or swsh1."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"base1\",\n    \"name\": \"Base\",\n    \"series\": \"Base\",\n    \"printedTotal\": 102,\n    \"total\": 102,\n    \"legalities\": {\n      \"standard\": \"Legal\",\n      \"expanded\": \"Legal\",\n      \"unlimited\": \"Legal\"\n    },\n    \"ptcgoCode\": \"BS\",\n    \"releaseDate\": \"1999/01/09\",\n    \"updatedAt\": \"2022/10/10 15:12:00\",\n    \"images\": {\n      \"symbol\": \"http://QvmvVtUczylyaJVqwDTdoKXOaiSsPityU.umaVL-PAHLVQJtxar+M6BhPcK3R3Gc9DjBVSzjZ1s\",\n      \"logo\": \"https://cbeXm.igtImiP540ZsSrEmEmpAoYEn\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d44aa680-525d-4cee-9682-70ee54b24645",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the set, for example base1 or swsh1."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Bad Request. Your request is either malformed, or is missing one or more required fields.\",\n    \"code\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "616a7f8c-2299-410b-807c-38b4cf09cc5b",
+              "name": "The rate limit has been exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the set, for example base1 or swsh1."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Bad Request. Your request is either malformed, or is missing one or more required fields.\",\n    \"code\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pokemontcg.io/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "5c590b6d-106c-443c-a048-5e217eacc36b",
+    "name": "Pokémon TCG Cards Sets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Pokémon TCG API is a free, community-run REST API (created and maintained by Andrew Backes) that serves Pokémon Trading Card Game data - every card across every set, with attacks, abilities, weaknesses, resistances, format legalities, high-resolution card images, and current market prices from TCGplayer and Cardmarket. The read-only surface covers cards, sets, and the metadata vocabularies (types, subtypes, supertypes, and rarities) used to filter them. Card and set search uses a Lucene-like query syntax via the q parameter - keyword and phrase matching, AND/OR/NOT logic, wildcards, exact matching, inclusive/exclusive range searches, and dot-notation nested-field filters (for example set.id:sm1 or legalities.standard:banned). Requests work without authentication at a reduced rate limit; a free API key from the Pokémon TCG Developer Portal (https://dev.pokemontcg.io), sent in the X-Api-Key header, raises the limits substantially.\n\nContact Support:\n Name: Pokémon TCG API",
+      "type": "text/plain"
+    }
+  }
+}

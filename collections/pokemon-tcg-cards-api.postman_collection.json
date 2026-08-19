@@ -1,0 +1,445 @@
+{
+  "item": [
+    {
+      "id": "5677684b-9ca3-4d1f-8cac-3e8cde16aa46",
+      "name": "Cards",
+      "description": {
+        "content": "Individual Pokémon, Trainer, and Energy cards with full gameplay data, images, legalities, and market prices.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f44736b5-b0d2-4d33-aa2f-3b27cbfc0f4c",
+          "name": "Search cards",
+          "request": {
+            "name": "Search cards",
+            "description": {
+              "content": "Search for one or many cards given a Lucene-like search query. Every field in the card object is searchable, including nested fields via dot notation (set.id, attacks.name, legalities.standard). Supports keyword and phrase matching, AND/OR/NOT logic, wildcards (name:char*), exact matching (!name:charizard), and range searches (hp:[150 TO *], nationalPokedexNumbers:[1 TO 151]).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "The search query, using the Lucene-like syntax. Example: name:charizard (subtypes:mega OR subtypes:vmax)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page of data to access."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "250",
+                  "description": "The maximum number of results to return (max 250)."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "The field(s) to order the results by, comma delimited. Prefix a field with a hyphen for descending order, for example orderBy=name,-number or orderBy=-set.releaseDate."
+                },
+                {
+                  "disabled": false,
+                  "key": "select",
+                  "value": "<string>",
+                  "description": "A comma delimited list of fields to return in the response, for example select=id,name,rarity. All fields are returned by default."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "64fa86ce-c48d-4a63-991c-5e9de6391218",
+              "name": "A paginated list of cards matching the query.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "name:charizard subtypes:mega"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "250"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name,-number"
+                    },
+                    {
+                      "key": "select",
+                      "value": "id,name,rarity"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"xy1-1\",\n      \"name\": \"Venusaur-EX\",\n      \"supertype\": \"Pokémon\",\n      \"subtypes\": [\n        \"Basic\",\n        \"EX\"\n      ],\n      \"level\": \"string\",\n      \"hp\": \"180\",\n      \"types\": [\n        \"Grass\"\n      ],\n      \"evolvesFrom\": \"Ivysaur\",\n      \"evolvesTo\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rules\": [\n        \"string\",\n        \"string\"\n      ],\n      \"ancientTrait\": {\n        \"name\": \"string\",\n        \"text\": \"string\"\n      },\n      \"abilities\": [\n        {\n          \"name\": \"string\",\n          \"text\": \"string\",\n          \"type\": \"Ability\"\n        },\n        {\n          \"name\": \"string\",\n          \"text\": \"string\",\n          \"type\": \"Ability\"\n        }\n      ],\n      \"attacks\": [\n        {\n          \"name\": \"Solar Beam\",\n          \"cost\": [\n            \"string\",\n            \"string\"\n          ],\n          \"convertedEnergyCost\": 1630,\n          \"damage\": \"120\",\n          \"text\": \"string\"\n        },\n        {\n          \"name\": \"Solar Beam\",\n          \"cost\": [\n            \"string\",\n            \"string\"\n          ],\n          \"convertedEnergyCost\": 2847,\n          \"damage\": \"120\",\n          \"text\": \"string\"\n        }\n      ],\n      \"weaknesses\": [\n        {\n          \"type\": \"Fire\",\n          \"value\": \"×2\"\n        },\n        {\n          \"type\": \"Fire\",\n          \"value\": \"×2\"\n        }\n      ],\n      \"resistances\": [\n        {\n          \"type\": \"Fire\",\n          \"value\": \"×2\"\n        },\n        {\n          \"type\": \"Fire\",\n          \"value\": \"×2\"\n        }\n      ],\n      \"retreatCost\": [\n        \"string\",\n        \"string\"\n      ],\n      \"convertedRetreatCost\": 8178,\n      \"set\": {\n        \"id\": \"base1\",\n        \"name\": \"Base\",\n        \"series\": \"Base\",\n        \"printedTotal\": 102,\n        \"total\": 102,\n        \"legalities\": {\n          \"standard\": \"Legal\",\n          \"expanded\": \"Legal\",\n          \"unlimited\": \"Legal\"\n        },\n        \"ptcgoCode\": \"BS\",\n        \"releaseDate\": \"1999/01/09\",\n        \"updatedAt\": \"2022/10/10 15:12:00\",\n        \"images\": {\n          \"symbol\": \"https://bPO.irRpU01gIejx4fNoIssa-x.zeCKRzQOC86oNzi\",\n          \"logo\": \"http://HDcLJhVTXRLhxrsnmktZCyszOsiULVDGK.nyNocMXOqqbZxUmNw107+UJg0Tibbw9zqdp4rgfsbvvYUoYqfhaq1aqtlr8HvTWs4T0-,q2lH9woFYNDu3.1IIXXXq\"\n        }\n      },\n      \"number\": \"1\",\n      \"artist\": \"Eske Yoshinob\",\n      \"rarity\": \"Rare Holo EX\",\n      \"flavorText\": \"string\",\n      \"nationalPokedexNumbers\": [\n        3\n      ],\n      \"legalities\": {\n        \"standard\": \"Legal\",\n        \"expanded\": \"Legal\",\n        \"unlimited\": \"Legal\"\n      },\n      \"regulationMark\": \"D\",\n      \"images\": {\n        \"small\": \"http://DmjbgtTetTHawXhbMlbkS.rqboirlq,QpnfL+fZcR.Dld-T6BVHm0VodAfDnerLt9\",\n        \"large\": \"https://eFNFRWOI.sigGdgpaGCA9tnFQCx8V8gAaX3r3DebNlfowAD.jpDWpE6-Oy0LvNeINfTc+Tg1ng8GxImLF38fY\"\n      },\n      \"tcgplayer\": {\n        \"url\": \"http://r.hdoCs38,rHkN.zA3BHwNgSxE32m,Lq\",\n        \"updatedAt\": \"2026/07/11\",\n        \"prices\": {\n          \"key_0\": {\n            \"low\": 9674.477018215694,\n            \"mid\": 8449.937530088884,\n            \"high\": 106.14405939084581,\n            \"market\": 3486.8283794339973,\n            \"directLow\": 95.01738012062444\n          },\n          \"key_1\": {\n            \"low\": 9874.337973676009,\n            \"mid\": 6714.017927765569,\n            \"high\": 2403.0283945223373,\n            \"market\": 5541.83274618161,\n            \"directLow\": 3900.1875380104743\n          },\n          \"key_2\": {\n            \"low\": 1357.327177528843,\n            \"mid\": 2762.2871304284868,\n            \"high\": 9341.798780168823,\n            \"market\": 8317.343641473912,\n            \"directLow\": 4743.257127653064\n          }\n        }\n      },\n      \"cardmarket\": {\n        \"url\": \"https://qaOEbQskAOyZ.fkmzkLr+Fu\",\n        \"updatedAt\": \"string\",\n        \"prices\": {\n          \"key_0\": 2873.278863094466\n        }\n      }\n    },\n    {\n      \"id\": \"xy1-1\",\n      \"name\": \"Venusaur-EX\",\n      \"supertype\": \"Pokémon\",\n      \"subtypes\": [\n        \"Basic\",\n        \"EX\"\n      ],\n      \"level\": \"string\",\n      \"hp\": \"180\",\n      \"types\": [\n        \"Grass\"\n      ],\n      \"evolvesFrom\": \"Ivysaur\",\n      \"evolvesTo\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rules\": [\n        \"string\",\n        \"string\"\n      ],\n      \"ancientTrait\": {\n        \"name\": \"string\",\n        \"text\": \"string\"\n      },\n      \"abilities\": [\n        {\n          \"name\": \"string\",\n          \"text\": \"string\",\n          \"type\": \"Ability\"\n        },\n        {\n          \"name\": \"string\",\n          \"text\": \"string\",\n          \"type\": \"Ability\"\n        }\n      ],\n      \"attacks\": [\n        {\n          \"name\": \"Solar Beam\",\n          \"cost\": [\n            \"string\",\n            \"string\"\n          ],\n          \"convertedEnergyCost\": 8210,\n          \"damage\": \"120\",\n          \"text\": \"string\"\n        },\n        {\n          \"name\": \"Solar Beam\",\n          \"cost\": [\n            \"string\",\n            \"string\"\n          ],\n          \"convertedEnergyCost\": 2337,\n          \"damage\": \"120\",\n          \"text\": \"string\"\n        }\n      ],\n      \"weaknesses\": [\n        {\n          \"type\": \"Fire\",\n          \"value\": \"×2\"\n        },\n        {\n          \"type\": \"Fire\",\n          \"value\": \"×2\"\n        }\n      ],\n      \"resistances\": [\n        {\n          \"type\": \"Fire\",\n          \"value\": \"×2\"\n        },\n        {\n          \"type\": \"Fire\",\n          \"value\": \"×2\"\n        }\n      ],\n      \"retreatCost\": [\n        \"string\",\n        \"string\"\n      ],\n      \"convertedRetreatCost\": 9705,\n      \"set\": {\n        \"id\": \"base1\",\n        \"name\": \"Base\",\n        \"series\": \"Base\",\n        \"printedTotal\": 102,\n        \"total\": 102,\n        \"legalities\": {\n          \"standard\": \"Legal\",\n          \"expanded\": \"Legal\",\n          \"unlimited\": \"Legal\"\n        },\n        \"ptcgoCode\": \"BS\",\n        \"releaseDate\": \"1999/01/09\",\n        \"updatedAt\": \"2022/10/10 15:12:00\",\n        \"images\": {\n          \"symbol\": \"http://RsuptDzeXiy.wtwgfGLUgijzKQt.uIIQSl4\",\n          \"logo\": \"http://AQLoMIjFvQgNJEyplFTGaYWzLTYDwTHU.oiciRMDWYl8w2ZxZeS4VkgEDJAhii+FUYQrSvTtmNt,OZwK\"\n        }\n      },\n      \"number\": \"1\",\n      \"artist\": \"Eske Yoshinob\",\n      \"rarity\": \"Rare Holo EX\",\n      \"flavorText\": \"string\",\n      \"nationalPokedexNumbers\": [\n        3\n      ],\n      \"legalities\": {\n        \"standard\": \"Legal\",\n        \"expanded\": \"Legal\",\n        \"unlimited\": \"Legal\"\n      },\n      \"regulationMark\": \"D\",\n      \"images\": {\n        \"small\": \"https://QIzOFSQmQPZeLvW.dwqJp+,Wspe0EJUV6S62mAWioSHH5OQW+dnA4O88myGKpvXirto6esJSFUY\",\n        \"large\": \"https://mPOOwMswtkhalglSReP.pvMPXJsCZxFPUCFiTXnOisPMQHfce\"\n      },\n      \"tcgplayer\": {\n        \"url\": \"http://t.qrmlgKr0kNod.5fAFsHe4zmbyd4FPOGWMw+mSX2-QsXn2BKNg+LBHDsuJQYAaM3LDEruzFJCevtN9HPX\",\n        \"updatedAt\": \"2026/07/11\",\n        \"prices\": {\n          \"key_0\": {\n            \"low\": 9997.663092179762,\n            \"mid\": 1717.68988833091,\n            \"high\": 5749.24671526904,\n            \"market\": 8021.785930603883,\n            \"directLow\": 1185.6968667847023\n          }\n        }\n      },\n      \"cardmarket\": {\n        \"url\": \"http://FfhSMtLAFzgsLyenwfPCrEhKVGBy.dakS872XCk-NwMvUqPk5M9QzDkZhDH0GEFVdpOTi\",\n        \"updatedAt\": \"string\",\n        \"prices\": {\n          \"key_0\": 2480.9580558082434\n        }\n      }\n    }\n  ],\n  \"page\": 1,\n  \"pageSize\": 250,\n  \"count\": 4108,\n  \"totalCount\": 20359\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3aab82e-2ed7-4f8f-a89a-3e0be2be7954",
+              "name": "The request was unacceptable, often due to an incorrect query string parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "name:charizard subtypes:mega"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "250"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name,-number"
+                    },
+                    {
+                      "key": "select",
+                      "value": "id,name,rarity"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Bad Request. Your request is either malformed, or is missing one or more required fields.\",\n    \"code\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb5581e2-13bb-48a9-990c-8f77f310ee21",
+              "name": "The rate limit has been exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "name:charizard subtypes:mega"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "250"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name,-number"
+                    },
+                    {
+                      "key": "select",
+                      "value": "id,name,rarity"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Bad Request. Your request is either malformed, or is missing one or more required fields.\",\n    \"code\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ee9aaee-1d07-4c2d-b650-bbbd91462c37",
+          "name": "Get a card",
+          "request": {
+            "name": "Get a card",
+            "description": {
+              "content": "Fetch the details of a single card by its ID (for example xy1-1).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the card, for example xy1-1 or base1-4."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dbb6b00f-c011-475a-8393-32eae4de88f5",
+              "name": "The requested card.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the card, for example xy1-1 or base1-4."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"xy1-1\",\n    \"name\": \"Venusaur-EX\",\n    \"supertype\": \"Pokémon\",\n    \"subtypes\": [\n      \"Basic\",\n      \"EX\"\n    ],\n    \"level\": \"string\",\n    \"hp\": \"180\",\n    \"types\": [\n      \"Grass\"\n    ],\n    \"evolvesFrom\": \"Ivysaur\",\n    \"evolvesTo\": [\n      \"string\",\n      \"string\"\n    ],\n    \"rules\": [\n      \"string\",\n      \"string\"\n    ],\n    \"ancientTrait\": {\n      \"name\": \"string\",\n      \"text\": \"string\"\n    },\n    \"abilities\": [\n      {\n        \"name\": \"string\",\n        \"text\": \"string\",\n        \"type\": \"Ability\"\n      },\n      {\n        \"name\": \"string\",\n        \"text\": \"string\",\n        \"type\": \"Ability\"\n      }\n    ],\n    \"attacks\": [\n      {\n        \"name\": \"Solar Beam\",\n        \"cost\": [\n          \"string\",\n          \"string\"\n        ],\n        \"convertedEnergyCost\": 378,\n        \"damage\": \"120\",\n        \"text\": \"string\"\n      },\n      {\n        \"name\": \"Solar Beam\",\n        \"cost\": [\n          \"string\",\n          \"string\"\n        ],\n        \"convertedEnergyCost\": 6874,\n        \"damage\": \"120\",\n        \"text\": \"string\"\n      }\n    ],\n    \"weaknesses\": [\n      {\n        \"type\": \"Fire\",\n        \"value\": \"×2\"\n      },\n      {\n        \"type\": \"Fire\",\n        \"value\": \"×2\"\n      }\n    ],\n    \"resistances\": [\n      {\n        \"type\": \"Fire\",\n        \"value\": \"×2\"\n      },\n      {\n        \"type\": \"Fire\",\n        \"value\": \"×2\"\n      }\n    ],\n    \"retreatCost\": [\n      \"string\",\n      \"string\"\n    ],\n    \"convertedRetreatCost\": 4906,\n    \"set\": {\n      \"id\": \"base1\",\n      \"name\": \"Base\",\n      \"series\": \"Base\",\n      \"printedTotal\": 102,\n      \"total\": 102,\n      \"legalities\": {\n        \"standard\": \"Legal\",\n        \"expanded\": \"Legal\",\n        \"unlimited\": \"Legal\"\n      },\n      \"ptcgoCode\": \"BS\",\n      \"releaseDate\": \"1999/01/09\",\n      \"updatedAt\": \"2022/10/10 15:12:00\",\n      \"images\": {\n        \"symbol\": \"http://xghTZkBHeGGonBDvxzFAajUHVBzCdPGIs.giqQxO0txORKQHwefn8Ber\",\n        \"logo\": \"http://NPbPTFqVkNGNyIdoXSniDxZPwQmSdeYeE.mxQTqtS9H-pUE2o9BuzsWslo4TlRpA1MoDVwWlYaAUhFEcSy7bpmBktYdMRW9QBCNYo8PTjCj\"\n      }\n    },\n    \"number\": \"1\",\n    \"artist\": \"Eske Yoshinob\",\n    \"rarity\": \"Rare Holo EX\",\n    \"flavorText\": \"string\",\n    \"nationalPokedexNumbers\": [\n      3\n    ],\n    \"legalities\": {\n      \"standard\": \"Legal\",\n      \"expanded\": \"Legal\",\n      \"unlimited\": \"Legal\"\n    },\n    \"regulationMark\": \"D\",\n    \"images\": {\n      \"small\": \"http://vqYjVClKjra.junHO.n6tJvHMv7nN9Ep+q9tHAa4oUE.J.\",\n      \"large\": \"https://PgDMMXtlwFYeQ.tbovPQ8gru+z3mDFQZ.0\"\n    },\n    \"tcgplayer\": {\n      \"url\": \"http://mcaXZiVz.rgvwKbXTmbqXPgXGe7PuRRMjt5.ODaXC5l7cbz+\",\n      \"updatedAt\": \"2026/07/11\",\n      \"prices\": {\n        \"key_0\": {\n          \"low\": 4135.149285616847,\n          \"mid\": 3499.6111227701845,\n          \"high\": 8266.308413590856,\n          \"market\": 3412.370091711003,\n          \"directLow\": 1671.3120053590692\n        },\n        \"key_1\": {\n          \"low\": 9540.563704123513,\n          \"mid\": 9612.254323720801,\n          \"high\": 2124.898945025139,\n          \"market\": 9670.52001061911,\n          \"directLow\": 583.6340224095015\n        }\n      }\n    },\n    \"cardmarket\": {\n      \"url\": \"http://QOijuNQluQJfJuhQOzPNuRaonE.sxRix0i1dUste.CcNox,sVI.b,UEjNafpdh4bJgr\",\n      \"updatedAt\": \"string\",\n      \"prices\": {\n        \"key_0\": 5020.630331830882\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a49333f7-b4c0-41aa-9e6a-beb22c795efb",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the card, for example xy1-1 or base1-4."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Bad Request. Your request is either malformed, or is missing one or more required fields.\",\n    \"code\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fa4476e-27a8-478a-9190-2f7057fe8637",
+              "name": "The rate limit has been exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the card, for example xy1-1 or base1-4."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Bad Request. Your request is either malformed, or is missing one or more required fields.\",\n    \"code\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pokemontcg.io/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "4cb393dd-060f-4c56-a078-6a919564a4f4",
+    "name": "Pokémon TCG Cards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Pokémon TCG API is a free, community-run REST API (created and maintained by Andrew Backes) that serves Pokémon Trading Card Game data - every card across every set, with attacks, abilities, weaknesses, resistances, format legalities, high-resolution card images, and current market prices from TCGplayer and Cardmarket. The read-only surface covers cards, sets, and the metadata vocabularies (types, subtypes, supertypes, and rarities) used to filter them. Card and set search uses a Lucene-like query syntax via the q parameter - keyword and phrase matching, AND/OR/NOT logic, wildcards, exact matching, inclusive/exclusive range searches, and dot-notation nested-field filters (for example set.id:sm1 or legalities.standard:banned). Requests work without authentication at a reduced rate limit; a free API key from the Pokémon TCG Developer Portal (https://dev.pokemontcg.io), sent in the X-Api-Key header, raises the limits substantially.\n\nContact Support:\n Name: Pokémon TCG API",
+      "type": "text/plain"
+    }
+  }
+}

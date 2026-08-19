@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pokémon TCG Cards Sets API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pokemontcg.io/v2/sets",
+            "params": [
+              {
+                "name": "q",
+                "value": "legalities.standard:legal",
+                "type": "query",
+                "description": "The search query."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of data to access."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results to return (max 250)."
+              },
+              {
+                "name": "orderBy",
+                "value": "name,-number",
+                "type": "query",
+                "description": "The field(s) to order the results by, comma delimited. Prefix a field with a hyphen for descending order, for example orderBy=name,-number or orderBy=-set.releaseDate."
+              },
+              {
+                "name": "select",
+                "value": "id,name,rarity",
+                "type": "query",
+                "description": "A comma delimited list of fields to return in the response, for example select=id,name,rarity. All fields are returned by default."
+              }
+            ]
+          },
+          "docs": "Search for one or many sets using the same Lucene-like query syntax as card search, for example legalities.standard:legal or series:base."
+        },
+        {
+          "info": {
+            "name": "Get a set",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.pokemontcg.io/v2/sets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "base1",
+                "type": "path",
+                "description": "The ID of the set, for example base1 or swsh1."
+              }
+            ]
+          },
+          "docs": "Fetch the details of a single set by its ID (for example base1 or swsh1)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

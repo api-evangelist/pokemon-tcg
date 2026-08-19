@@ -1,0 +1,455 @@
+{
+  "item": [
+    {
+      "id": "60c8191b-8e4f-45a7-886d-227790d39148",
+      "name": "Metadata",
+      "description": {
+        "content": "The controlled vocabularies used across cards - energy types, card subtypes, supertypes, and rarities.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "69743b96-3806-407c-b7c9-7063cf06b910",
+          "name": "Get types",
+          "request": {
+            "name": "Get types",
+            "description": {
+              "content": "Returns all energy types used on cards - Colorless, Darkness, Dragon, Fairy, Fighting, Fire, Grass, Lightning, Metal, Psychic, and Water.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77e57a70-5b2e-4849-8ce3-ad137c57653f",
+              "name": "A list of string values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a5ee6ef-af74-415d-abf4-0b62aba374d0",
+              "name": "The rate limit has been exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Bad Request. Your request is either malformed, or is missing one or more required fields.\",\n    \"code\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "120ae45d-c8d4-422f-8444-9564671a918b",
+          "name": "Get subtypes",
+          "request": {
+            "name": "Get subtypes",
+            "description": {
+              "content": "Returns all card subtypes - Basic, Stage 1, Stage 2, EX, GX, V, VMAX, VSTAR, MEGA, BREAK, TAG TEAM, Item, Supporter, Stadium, and the rest.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subtypes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c2e78811-5404-4504-9b86-4652697ca9ad",
+              "name": "A list of string values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subtypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb86a865-73f7-4787-8595-cdabef6d8be1",
+              "name": "The rate limit has been exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subtypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Bad Request. Your request is either malformed, or is missing one or more required fields.\",\n    \"code\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a42f0d7f-6f18-4d6d-9af4-beaab6a7336a",
+          "name": "Get supertypes",
+          "request": {
+            "name": "Get supertypes",
+            "description": {
+              "content": "Returns all card supertypes - Energy, Pokémon, and Trainer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "supertypes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39a3940b-80f5-4a7d-843f-1d9f8eb15428",
+              "name": "A list of string values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supertypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "561ef09f-b825-4e4d-bd64-daaef2701cfd",
+              "name": "The rate limit has been exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "supertypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Bad Request. Your request is either malformed, or is missing one or more required fields.\",\n    \"code\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41901fa3-ed0f-472f-810d-4e9ca5d9db32",
+          "name": "Get rarities",
+          "request": {
+            "name": "Get rarities",
+            "description": {
+              "content": "Returns all card rarities - Common, Uncommon, Rare, Rare Holo, Ultra Rare, Illustration Rare, Special Illustration Rare, Amazing Rare, Radiant Rare, Promo, and the rest.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rarities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "10df9c25-baac-4ab4-ac32-15c3f3aa6543",
+              "name": "A list of string values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rarities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4156a559-41e9-45c3-9700-cb4b5f4566f1",
+              "name": "The rate limit has been exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rarities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Bad Request. Your request is either malformed, or is missing one or more required fields.\",\n    \"code\": 400\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.pokemontcg.io/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "6697b711-83b0-4ba9-b999-423300e398b4",
+    "name": "Pokémon TCG Cards Metadata API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Pokémon TCG API is a free, community-run REST API (created and maintained by Andrew Backes) that serves Pokémon Trading Card Game data - every card across every set, with attacks, abilities, weaknesses, resistances, format legalities, high-resolution card images, and current market prices from TCGplayer and Cardmarket. The read-only surface covers cards, sets, and the metadata vocabularies (types, subtypes, supertypes, and rarities) used to filter them. Card and set search uses a Lucene-like query syntax via the q parameter - keyword and phrase matching, AND/OR/NOT logic, wildcards, exact matching, inclusive/exclusive range searches, and dot-notation nested-field filters (for example set.id:sm1 or legalities.standard:banned). Requests work without authentication at a reduced rate limit; a free API key from the Pokémon TCG Developer Portal (https://dev.pokemontcg.io), sent in the X-Api-Key header, raises the limits substantially.\n\nContact Support:\n Name: Pokémon TCG API",
+      "type": "text/plain"
+    }
+  }
+}
