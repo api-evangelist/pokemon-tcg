@@ -13,6 +13,18 @@ description: The Pokémon TCG API is a free, community-run REST API created and
   limit; a free API key from the developer portal, sent in the X-Api-Key
   header, raises the limits. Official SDKs cover Python, Ruby, JavaScript,
   TypeScript, C#, Kotlin, PHP, Go, Dart, and Elixir.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: open
