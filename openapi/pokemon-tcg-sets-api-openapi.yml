@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Pokémon TCG Cards Sets API
-  description: The Pokémon TCG API is a free, community-run REST API (created and maintained by Andrew Backes) that serves Pokémon Trading Card Game data - every card across every set, with attacks, abilities, weaknesses, resistances, format legalities, high-resolution card images, and current market prices from TCGplayer and Cardmarket. The read-only surface covers cards, sets, and the metadata vocabularies (types, subtypes, supertypes, and rarities) used to filter them. Card and set search uses a Lucene-like query syntax via the q parameter - keyword and phrase matching, AND/OR/NOT logic, wildcards, exact matching, inclusive/exclusive range searches, and dot-notation nested-field filters (for example set.id:sm1 or legalities.standard:banned). Requests work without authentication at a reduced rate limit; a free API key from the Pokémon TCG Developer Portal (https://dev.pokemontcg.io), sent in the X-Api-Key header, raises the limits substantially.
+  title: Pokémon TCG Sets API
+  description: The Pokémon TCG API is a free, community-run REST API (created and maintained by Andrew Backes) that serves Pokémon Trading Card Game data - every card across every set, with attacks, abilities, weaknesses, resistances, format legalities, high-resolution card images, and current market prices from TCGplayer and Cardmarket.
   version: '2.0'
   contact:
     name: Pokémon TCG API
@@ -93,67 +93,7 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  parameters:
-    PageSize:
-      name: pageSize
-      in: query
-      required: false
-      description: The maximum number of results to return (max 250).
-      schema:
-        type: integer
-        default: 250
-        maximum: 250
-    OrderBy:
-      name: orderBy
-      in: query
-      required: false
-      description: The field(s) to order the results by, comma delimited. Prefix a field with a hyphen for descending order, for example orderBy=name,-number or orderBy=-set.releaseDate.
-      schema:
-        type: string
-      example: name,-number
-    Page:
-      name: page
-      in: query
-      required: false
-      description: The page of data to access.
-      schema:
-        type: integer
-        default: 1
-        minimum: 1
-    Select:
-      name: select
-      in: query
-      required: false
-      description: A comma delimited list of fields to return in the response, for example select=id,name,rarity. All fields are returned by default.
-      schema:
-        type: string
-      example: id,name,rarity
   schemas:
-    Legalities:
-      type: object
-      description: Format legality (legal or banned) where present.
-      properties:
-        standard:
-          type: string
-          example: Legal
-        expanded:
-          type: string
-          example: Legal
-        unlimited:
-          type: string
-          example: Legal
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              example: Bad Request. Your request is either malformed, or is missing one or more required fields.
-            code:
-              type: integer
-              example: 400
     Set:
       type: object
       description: A Pokémon Trading Card Game set (expansion).
@@ -196,6 +136,66 @@ components:
             logo:
               type: string
               format: uri
+    Legalities:
+      type: object
+      description: Format legality (legal or banned) where present.
+      properties:
+        standard:
+          type: string
+          example: Legal
+        expanded:
+          type: string
+          example: Legal
+        unlimited:
+          type: string
+          example: Legal
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Bad Request. Your request is either malformed, or is missing one or more required fields.
+            code:
+              type: integer
+              example: 400
+  parameters:
+    Page:
+      name: page
+      in: query
+      required: false
+      description: The page of data to access.
+      schema:
+        type: integer
+        default: 1
+        minimum: 1
+    Select:
+      name: select
+      in: query
+      required: false
+      description: A comma delimited list of fields to return in the response, for example select=id,name,rarity. All fields are returned by default.
+      schema:
+        type: string
+      example: id,name,rarity
+    OrderBy:
+      name: orderBy
+      in: query
+      required: false
+      description: The field(s) to order the results by, comma delimited. Prefix a field with a hyphen for descending order, for example orderBy=name,-number or orderBy=-set.releaseDate.
+      schema:
+        type: string
+      example: name,-number
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      description: The maximum number of results to return (max 250).
+      schema:
+        type: integer
+        default: 250
+        maximum: 250
   responses:
     NotFound:
       description: The requested resource does not exist.
@@ -203,14 +203,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was unacceptable, often due to an incorrect query string parameter.
+    TooManyRequests:
+      description: The rate limit has been exceeded.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: The rate limit has been exceeded.
+    BadRequest:
+      description: The request was unacceptable, often due to an incorrect query string parameter.
       content:
         application/json:
           schema:

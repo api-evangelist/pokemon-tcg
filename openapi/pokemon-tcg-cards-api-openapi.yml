@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Pokémon TCG Cards API
-  description: The Pokémon TCG API is a free, community-run REST API (created and maintained by Andrew Backes) that serves Pokémon Trading Card Game data - every card across every set, with attacks, abilities, weaknesses, resistances, format legalities, high-resolution card images, and current market prices from TCGplayer and Cardmarket. The read-only surface covers cards, sets, and the metadata vocabularies (types, subtypes, supertypes, and rarities) used to filter them. Card and set search uses a Lucene-like query syntax via the q parameter - keyword and phrase matching, AND/OR/NOT logic, wildcards, exact matching, inclusive/exclusive range searches, and dot-notation nested-field filters (for example set.id:sm1 or legalities.standard:banned). Requests work without authentication at a reduced rate limit; a free API key from the Pokémon TCG Developer Portal (https://dev.pokemontcg.io), sent in the X-Api-Key header, raises the limits substantially.
+  description: The Pokémon TCG API is a free, community-run REST API (created and maintained by Andrew Backes) that serves Pokémon Trading Card Game data - every card across every set, with attacks, abilities, weaknesses, resistances, format legalities, high-resolution card images, and current market prices from TCGplayer and Cardmarket.
   version: '2.0'
   contact:
     name: Pokémon TCG API
@@ -98,29 +98,6 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   schemas:
-    TcgplayerPrice:
-      type: object
-      properties:
-        low:
-          type: number
-        mid:
-          type: number
-        high:
-          type: number
-        market:
-          type: number
-        directLow:
-          type: number
-          nullable: true
-    TypeValue:
-      type: object
-      properties:
-        type:
-          type: string
-          example: Fire
-        value:
-          type: string
-          example: ×2
     Legalities:
       type: object
       description: Format legality (legal or banned) where present.
@@ -134,18 +111,6 @@ components:
         unlimited:
           type: string
           example: Legal
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              example: Bad Request. Your request is either malformed, or is missing one or more required fields.
-            code:
-              type: integer
-              example: 400
     Set:
       type: object
       description: A Pokémon Trading Card Game set (expansion).
@@ -351,15 +316,43 @@ components:
               description: Cardmarket price points including averageSellPrice, lowPrice, trendPrice, reverse-holo variants, and 1/7/30-day averages.
               additionalProperties:
                 type: number
+    TcgplayerPrice:
+      type: object
+      properties:
+        low:
+          type: number
+        mid:
+          type: number
+        high:
+          type: number
+        market:
+          type: number
+        directLow:
+          type:
+          - number
+          - 'null'
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Bad Request. Your request is either malformed, or is missing one or more required fields.
+            code:
+              type: integer
+              example: 400
+    TypeValue:
+      type: object
+      properties:
+        type:
+          type: string
+          example: Fire
+        value:
+          type: string
+          example: ×2
   parameters:
-    OrderBy:
-      name: orderBy
-      in: query
-      required: false
-      description: The field(s) to order the results by, comma delimited. Prefix a field with a hyphen for descending order, for example orderBy=name,-number or orderBy=-set.releaseDate.
-      schema:
-        type: string
-      example: name,-number
     Page:
       name: page
       in: query
@@ -369,6 +362,22 @@ components:
         type: integer
         default: 1
         minimum: 1
+    Select:
+      name: select
+      in: query
+      required: false
+      description: A comma delimited list of fields to return in the response, for example select=id,name,rarity. All fields are returned by default.
+      schema:
+        type: string
+      example: id,name,rarity
+    OrderBy:
+      name: orderBy
+      in: query
+      required: false
+      description: The field(s) to order the results by, comma delimited. Prefix a field with a hyphen for descending order, for example orderBy=name,-number or orderBy=-set.releaseDate.
+      schema:
+        type: string
+      example: name,-number
     PageSize:
       name: pageSize
       in: query
@@ -378,14 +387,6 @@ components:
         type: integer
         default: 250
         maximum: 250
-    Select:
-      name: select
-      in: query
-      required: false
-      description: A comma delimited list of fields to return in the response, for example select=id,name,rarity. All fields are returned by default.
-      schema:
-        type: string
-      example: id,name,rarity
   responses:
     NotFound:
       description: The requested resource does not exist.

@@ -1,9 +1,7 @@
 {
   "provider": "pokemon-tcg",
   "sources": [
-    "pokemon-tcg-cards-api-openapi.yml",
-    "pokemon-tcg-metadata-api-openapi.yml",
-    "pokemon-tcg-sets-api-openapi.yml"
+    "_original/pokemon-tcg-openapi.yml"
   ],
   "outputs": [
     "pokemon-tcg-cards-api-openapi.yml",
@@ -13,6 +11,14 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "pokemon-tcg-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "pokemon-tcg-cards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "pokemon-tcg-metadata-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "pokemon-tcg-sets-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
