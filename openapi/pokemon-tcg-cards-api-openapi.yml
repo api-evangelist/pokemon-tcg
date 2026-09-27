@@ -97,62 +97,41 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
+  responses:
+    BadRequest:
+      description: The request was unacceptable, often due to an incorrect query string parameter.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: The rate limit has been exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    Legalities:
+    TcgplayerPrice:
       type: object
-      description: Format legality (legal or banned) where present.
       properties:
-        standard:
-          type: string
-          example: Legal
-        expanded:
-          type: string
-          example: Legal
-        unlimited:
-          type: string
-          example: Legal
-    Set:
-      type: object
-      description: A Pokémon Trading Card Game set (expansion).
-      properties:
-        id:
-          type: string
-          example: base1
-        name:
-          type: string
-          example: Base
-        series:
-          type: string
-          example: Base
-        printedTotal:
-          type: integer
-          description: The number printed on cards in the set.
-          example: 102
-        total:
-          type: integer
-          description: The total number of cards in the set, including secret rares.
-          example: 102
-        legalities:
-          $ref: '#/components/schemas/Legalities'
-        ptcgoCode:
-          type: string
-          description: The code used in Pokémon TCG Online / Live.
-          example: BS
-        releaseDate:
-          type: string
-          example: 1999/01/09
-        updatedAt:
-          type: string
-          example: 2022/10/10 15:12:00
-        images:
-          type: object
-          properties:
-            symbol:
-              type: string
-              format: uri
-            logo:
-              type: string
-              format: uri
+        low:
+          type: number
+        mid:
+          type: number
+        high:
+          type: number
+        market:
+          type: number
+        directLow:
+          type:
+          - number
+          - 'null'
     Card:
       type: object
       description: A single Pokémon Trading Card Game card.
@@ -316,21 +295,57 @@ components:
               description: Cardmarket price points including averageSellPrice, lowPrice, trendPrice, reverse-holo variants, and 1/7/30-day averages.
               additionalProperties:
                 type: number
-    TcgplayerPrice:
+    TypeValue:
       type: object
       properties:
-        low:
-          type: number
-        mid:
-          type: number
-        high:
-          type: number
-        market:
-          type: number
-        directLow:
-          type:
-          - number
-          - 'null'
+        type:
+          type: string
+          example: Fire
+        value:
+          type: string
+          example: ×2
+    Set:
+      type: object
+      description: A Pokémon Trading Card Game set (expansion).
+      properties:
+        id:
+          type: string
+          example: base1
+        name:
+          type: string
+          example: Base
+        series:
+          type: string
+          example: Base
+        printedTotal:
+          type: integer
+          description: The number printed on cards in the set.
+          example: 102
+        total:
+          type: integer
+          description: The total number of cards in the set, including secret rares.
+          example: 102
+        legalities:
+          $ref: '#/components/schemas/Legalities'
+        ptcgoCode:
+          type: string
+          description: The code used in Pokémon TCG Online / Live.
+          example: BS
+        releaseDate:
+          type: string
+          example: 1999/01/09
+        updatedAt:
+          type: string
+          example: 2022/10/10 15:12:00
+        images:
+          type: object
+          properties:
+            symbol:
+              type: string
+              format: uri
+            logo:
+              type: string
+              format: uri
     Error:
       type: object
       properties:
@@ -343,16 +358,37 @@ components:
             code:
               type: integer
               example: 400
-    TypeValue:
+    Legalities:
       type: object
+      description: Format legality (legal or banned) where present.
       properties:
-        type:
+        standard:
           type: string
-          example: Fire
-        value:
+          example: Legal
+        expanded:
           type: string
-          example: ×2
+          example: Legal
+        unlimited:
+          type: string
+          example: Legal
   parameters:
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      description: The maximum number of results to return (max 250).
+      schema:
+        type: integer
+        default: 250
+        maximum: 250
+    OrderBy:
+      name: orderBy
+      in: query
+      required: false
+      description: The field(s) to order the results by, comma delimited. Prefix a field with a hyphen for descending order, for example orderBy=name,-number or orderBy=-set.releaseDate.
+      schema:
+        type: string
+      example: name,-number
     Page:
       name: page
       in: query
@@ -370,42 +406,6 @@ components:
       schema:
         type: string
       example: id,name,rarity
-    OrderBy:
-      name: orderBy
-      in: query
-      required: false
-      description: The field(s) to order the results by, comma delimited. Prefix a field with a hyphen for descending order, for example orderBy=name,-number or orderBy=-set.releaseDate.
-      schema:
-        type: string
-      example: name,-number
-    PageSize:
-      name: pageSize
-      in: query
-      required: false
-      description: The maximum number of results to return (max 250).
-      schema:
-        type: integer
-        default: 250
-        maximum: 250
-  responses:
-    NotFound:
-      description: The requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: The rate limit has been exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was unacceptable, often due to an incorrect query string parameter.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKeyAuth:
       type: apiKey

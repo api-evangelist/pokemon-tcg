@@ -93,6 +93,60 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
+  responses:
+    BadRequest:
+      description: The request was unacceptable, often due to an incorrect query string parameter.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: The rate limit has been exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      description: The maximum number of results to return (max 250).
+      schema:
+        type: integer
+        default: 250
+        maximum: 250
+    OrderBy:
+      name: orderBy
+      in: query
+      required: false
+      description: The field(s) to order the results by, comma delimited. Prefix a field with a hyphen for descending order, for example orderBy=name,-number or orderBy=-set.releaseDate.
+      schema:
+        type: string
+      example: name,-number
+    Page:
+      name: page
+      in: query
+      required: false
+      description: The page of data to access.
+      schema:
+        type: integer
+        default: 1
+        minimum: 1
+    Select:
+      name: select
+      in: query
+      required: false
+      description: A comma delimited list of fields to return in the response, for example select=id,name,rarity. All fields are returned by default.
+      schema:
+        type: string
+      example: id,name,rarity
   schemas:
     Set:
       type: object
@@ -136,6 +190,18 @@ components:
             logo:
               type: string
               format: uri
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Bad Request. Your request is either malformed, or is missing one or more required fields.
+            code:
+              type: integer
+              example: 400
     Legalities:
       type: object
       description: Format legality (legal or banned) where present.
@@ -149,72 +215,6 @@ components:
         unlimited:
           type: string
           example: Legal
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              example: Bad Request. Your request is either malformed, or is missing one or more required fields.
-            code:
-              type: integer
-              example: 400
-  parameters:
-    Page:
-      name: page
-      in: query
-      required: false
-      description: The page of data to access.
-      schema:
-        type: integer
-        default: 1
-        minimum: 1
-    Select:
-      name: select
-      in: query
-      required: false
-      description: A comma delimited list of fields to return in the response, for example select=id,name,rarity. All fields are returned by default.
-      schema:
-        type: string
-      example: id,name,rarity
-    OrderBy:
-      name: orderBy
-      in: query
-      required: false
-      description: The field(s) to order the results by, comma delimited. Prefix a field with a hyphen for descending order, for example orderBy=name,-number or orderBy=-set.releaseDate.
-      schema:
-        type: string
-      example: name,-number
-    PageSize:
-      name: pageSize
-      in: query
-      required: false
-      description: The maximum number of results to return (max 250).
-      schema:
-        type: integer
-        default: 250
-        maximum: 250
-  responses:
-    NotFound:
-      description: The requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: The rate limit has been exceeded.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was unacceptable, often due to an incorrect query string parameter.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiKeyAuth:
       type: apiKey
