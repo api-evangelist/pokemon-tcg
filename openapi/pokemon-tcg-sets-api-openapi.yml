@@ -94,6 +94,12 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   responses:
+    NotFound:
+      description: The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     BadRequest:
       description: The request was unacceptable, often due to an incorrect query string parameter.
       content:
@@ -106,13 +112,15 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
+    OrderBy:
+      name: orderBy
+      in: query
+      required: false
+      description: The field(s) to order the results by, comma delimited. Prefix a field with a hyphen for descending order, for example orderBy=name,-number or orderBy=-set.releaseDate.
+      schema:
+        type: string
+      example: name,-number
     PageSize:
       name: pageSize
       in: query
@@ -122,14 +130,6 @@ components:
         type: integer
         default: 250
         maximum: 250
-    OrderBy:
-      name: orderBy
-      in: query
-      required: false
-      description: The field(s) to order the results by, comma delimited. Prefix a field with a hyphen for descending order, for example orderBy=name,-number or orderBy=-set.releaseDate.
-      schema:
-        type: string
-      example: name,-number
     Page:
       name: page
       in: query
@@ -148,6 +148,31 @@ components:
         type: string
       example: id,name,rarity
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Bad Request. Your request is either malformed, or is missing one or more required fields.
+            code:
+              type: integer
+              example: 400
+    Legalities:
+      type: object
+      description: Format legality (legal or banned) where present.
+      properties:
+        standard:
+          type: string
+          example: Legal
+        expanded:
+          type: string
+          example: Legal
+        unlimited:
+          type: string
+          example: Legal
     Set:
       type: object
       description: A Pokémon Trading Card Game set (expansion).
@@ -190,31 +215,6 @@ components:
             logo:
               type: string
               format: uri
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-              example: Bad Request. Your request is either malformed, or is missing one or more required fields.
-            code:
-              type: integer
-              example: 400
-    Legalities:
-      type: object
-      description: Format legality (legal or banned) where present.
-      properties:
-        standard:
-          type: string
-          example: Legal
-        expanded:
-          type: string
-          example: Legal
-        unlimited:
-          type: string
-          example: Legal
   securitySchemes:
     apiKeyAuth:
       type: apiKey
